@@ -1,0 +1,26 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Login.css";
+const Login = () => {
+  return (
+    <div className="from-container">
+      <div>
+        <h1 className="from-title">Login</h1>
+        <form action="">
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" id="" />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input type="password" name="Password" id="" />
+          </div>
+          <input className="from-submit" type="submit" value="Login" />
+        </form>
+        <p>New To Ema-John?<Link className="from-link" to='/singup'>Create an account</Link></p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

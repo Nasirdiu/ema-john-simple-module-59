@@ -9,6 +9,8 @@ import NotFound from "./components/NotFound/NotFound";
 import AOS from 'aos'
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
+import Login from "./components/Login/Login";
+import SingUp from "./components/SingUp/SingUp";
 function App() {
   useEffect(()=>{
     AOS.init();
@@ -22,6 +24,8 @@ function App() {
         <Route path="/orders" element={<Order></Order>}></Route>
         <Route path="/inventory" element={<Inventory></Inventory>}></Route>
         <Route path="/about" element={<About></About>}></Route>
+        <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/singup" element={<SingUp></SingUp>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
     </div>
