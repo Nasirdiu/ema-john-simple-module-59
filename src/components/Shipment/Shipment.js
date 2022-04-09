@@ -1,40 +1,38 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Shipment = () => {
+    const [user]=useAuthState(auth)
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirampassword, setConfiramPassword] = useState("");
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
     const [error, setError] = useState("");
   
     const nagative = useNavigate();
 
+    const handleName=event=>{
+        setName(event.target.value);
+    }
     const handleEmail = (event) => {
         setEmail(event.target.value);
       };
     
       const handlePassword = (event) => {
-        setPassword(event.target.value);
+        setAddress(event.target.value);
       };
       const handleConfiramPassword = (event) => {
-        setConfiramPassword(event.target.value);
+        setPhone(event.target.value);
       };
 
       const handleCreateUser = (event) => {
         event.preventDefault();
-        if (password !== confirampassword) {
-          setError("Your two password did not match");
-          return;
-        }
-        if (password.length < 6) {
-          setError("please 6 characters or longer");
-          return;
-        }
-        createUserWithEmailAndPassword(email, password).then((result) => {
-          console.log("user cereat");
-        });
-      };
+        const shipping={name,email,address,phone}
+        console.log(shipping);
+      }
   
     
     return (
@@ -43,9 +41,19 @@ const Shipment = () => {
         <h1 className="from-title">Shipping Information</h1>
         <form onSubmit={handleCreateUser}>
           <div className="input-group">
+            <label htmlFor="name">Name</label>
+            <input
+              onBlur={handleName}
+              type="text"
+              name="name"
+              id=""
+              required
+            />
+          </div>
+          <div className="input-group">
             <label htmlFor="email">Email</label>
             <input
-              onBlur={handleEmail}
+              value={user?.email} readOnly
               type="email"
               name="email"
               id=""
@@ -53,28 +61,28 @@ const Shipment = () => {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="address">Address</label>
             <input
               onBlur={handlePassword}
-              type="password"
-              name="Password"
+              type="text"
+              name="address"
               id=""
               required
             />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Confirm Password</label>
+            <label htmlFor="Phone">Phone Number</label>
             <input
               onBlur={handleConfiramPassword}
-              type="password"
-              name="Password"
+              type="text"
+              name="Phone"
               id=""
               required
             />
           </div>
           <p style={{ color: "red" }}>{error}</p>
           
-          <input className="from-submit" type="submit" value="Login" required />
+          <input className="from-submit" type="submit" value="Add Shipping" required />
         </form>
         <p>
           AllReady Have and account?
