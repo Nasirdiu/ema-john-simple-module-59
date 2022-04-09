@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 const SingUp = () => {
   const [email, setEmail] = useState("");
@@ -8,9 +8,10 @@ const SingUp = () => {
   const [confirampassword, setConfiramPassword] = useState("");
   const [error, setError] = useState("");
 
-  const nagative=useNavigate();
+  const nagative = useNavigate();
 
-const [createUserWithEmailAndPassword,hookerror,user]=useCreateUserWithEmailAndPassword(auth)
+  const [createUserWithEmailAndPassword, hookerror, user] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -19,9 +20,9 @@ const [createUserWithEmailAndPassword,hookerror,user]=useCreateUserWithEmailAndP
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
-if(user){
-nagative('/shop')
-}
+  if (user) {
+    nagative("/shop ");
+  }
 
   const handleConfiramPassword = (event) => {
     setConfiramPassword(event.target.value);
@@ -33,15 +34,13 @@ nagative('/shop')
       setError("Your two password did not match");
       return;
     }
-    if(password.length<6){
-        setError('please 6 characters or longer');
-        return;
+    if (password.length < 6) {
+      setError("please 6 characters or longer");
+      return;
     }
-    createUserWithEmailAndPassword(email,password)
-    .then(result=>{
-       
-        console.log('user cereat');
-    })
+    createUserWithEmailAndPassword(email, password).then((result) => {
+      console.log("user cereat");
+    });
   };
 
   return (
